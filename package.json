@@ -5,6 +5,8 @@
   "keywords": [],
   "main": "src/index.tsx",
   "dependencies": {
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^14.0.0",
     "@types/lodash.throttle": "4.1.7",
     "localforage": "1.10.0",
     "lodash.throttle": "4.1.1",
