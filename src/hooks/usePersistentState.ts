@@ -1,7 +1,7 @@
 import { SetStateAction, useCallback, useEffect, useState } from "react";
 import localForage from "localforage";
 import { useAutoUpdatingRef } from "./useAutoUpdatingRef";
-import { checkIsVariableFunction } from "../functions/checkIsVariableFunction";
+import { checkIsVariableFunction } from "../typeGuards/checkIsVariableFunction";
 
 /**
  * React hook for having a state value that is saved in IndexedDB
