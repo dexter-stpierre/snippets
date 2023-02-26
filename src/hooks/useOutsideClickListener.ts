@@ -7,7 +7,7 @@ export function useOutsideClickListener(
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
       if (
-        refs.every((ref) => ref.current && !ref.current.contains(event.target))
+        refs.every((ref) => ref.current && !ref.current.contains(event.target as Node))
       ) {
         fn();
       }
