@@ -1,5 +1,3 @@
-type Blah<T> = T | null
-
 /**
  * A helper function to get a value from localStorage. If there is a value it calls `JSON.parse` on it, if not it returns `null`
  *
