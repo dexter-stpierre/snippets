@@ -1,3 +1,5 @@
+type Blah<T> = T | null
+
 /**
  * A helper function to get a value from localStorage. If there is a value it calls `JSON.parse` on it, if not it returns `null`
  *
@@ -5,7 +7,7 @@
  * @template DataType The type of data that is stored as JSON in localStorage
  * @param key The key where the data is stored
  */
-export function getJSONValueFromLocalStorage<DataType>(key: string): DataType | null {
+export function getJSONValueFromLocalStorage<DataType = unknown>(key: string): DataType | null {
   const stringValue = localStorage.getItem(key);
   if (!stringValue) return null;
   const value: DataType = JSON.parse(stringValue);
