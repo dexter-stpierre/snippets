@@ -3,6 +3,7 @@ import localForage from "localforage";
 import { useAutoUpdatingRef } from "./useAutoUpdatingRef";
 import { checkIsVariableFunction } from "../typeGuards/checkIsVariableFunction";
 import { getJSONValueFromLocalStorage } from '../functions/getJSONValueFromLocalStorage';
+import { setJSONValueInLocalStorage } from '../functions/setJSONValueInLocalStorage';
 
 /**
  * React hook for having a state value that is saved in IndexedDB
@@ -34,7 +35,7 @@ export const usePersistentState = <DataType = never>(
         const newData = checkIsVariableFunction(newState)
           ? newState(previousState)
           : newState;
-        localForage.setItem(key, newData);
+        setJSONValueInLocalStorage(key, newData);
         return newData;
       });
     },
