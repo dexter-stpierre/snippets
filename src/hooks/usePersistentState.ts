@@ -2,6 +2,8 @@ import { SetStateAction, useCallback, useEffect, useState } from "react";
 import localForage from "localforage";
 import { useAutoUpdatingRef } from "./useAutoUpdatingRef";
 import { checkIsVariableFunction } from "../typeGuards/checkIsVariableFunction";
+import { getJSONValueFromLocalStorage } from '../functions/getJSONValueFromLocalStorage';
+import { setJSONValueInLocalStorage } from '../functions/setJSONValueInLocalStorage';
 
 /**
  * React hook for having a state value that is saved in IndexedDB
@@ -20,11 +22,9 @@ export const usePersistentState = <DataType = never>(
   const defaultDataRef = useAutoUpdatingRef(defaultData);
 
   useEffect(() => {
-    localForage.getItem<DataType>(key).then((value) => {
-      if (value === null) return setData(defaultDataRef.current);
-      setData(value);
-    });
-    return;
+    const savedData = getJSONValueFromLocalStorage<DataType>(key);
+    if (!savedData) return setData(defaultDataRef.current);
+    setData(savedData);
     // Disable exhaustive-deps because it is erroring due to DataType, a type, not being included
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [key, defaultDataRef]);
@@ -35,7 +35,7 @@ export const usePersistentState = <DataType = never>(
         const newData = checkIsVariableFunction(newState)
           ? newState(previousState)
           : newState;
-        localForage.setItem(key, newData);
+        setJSONValueInLocalStorage(key, newData);
         return newData;
       });
     },

@@ -5,9 +5,7 @@
  * @template DataType The type of data that is stored as JSON in localStorage
  * @param key The key where the data is stored
  */
-export function getJSONValueFromLocalStorage<DataType = unknown>(key: string): DataType | null {
-  const stringValue = localStorage.getItem(key);
-  if (!stringValue) return null;
-  const value: DataType = JSON.parse(stringValue);
-  return value;
+export function setJSONValueInLocalStorage(key: string, data: any): void {
+  const stringValue = JSON.stringify(data);
+  localStorage.setItem(key, stringValue);
 };
